@@ -1,11 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Moe Kyaw Aung – GitHub Page</title>
+  <meta charset="UTF-8" />
+  <title>Moe Kyaw Aung – Android & Web Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.14);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 40px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 16px;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+      background: rgba(15,23,42,0.7);
+    }
+
+    .tag--accent {
+      border-color: rgba(34,197,94,0.6);
+      background: var(--accent-soft);
+      color: #bbf7d0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+      background: rgba(15,23,42,0.8);
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: #022c22;
+      border-color: transparent;
+      font-weight: 500;
+    }
+
+    .btn--primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+    }
+
+    .hero-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, #064e3b 0, #020617 55%);
+      padding: 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a7f3d0;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero-card-list {
+      list-style: none;
+      font-size: 13px;
+      color: #d1fae5;
+      margin-bottom: 8px;
+    }
+
+    .hero-card-list li + li {
+      margin-top: 4px;
+    }
+
+    .hero-card-badge {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(187,247,208,0.4);
+      color: #bbf7d0;
+      background: rgba(6,78,59,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    section {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .section-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid--two {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, #020617 0, #000 100%);
+      padding: 12px 14px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      margin-top: 6px;
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+    .contact {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #6b7280;
+      border-top: 1px solid rgba(31,41,55,0.9);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        font-size: 13px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hi, I'm Moe Kyaw Aung</h1>
-  <p>Welcome to my GitHub Page (Moekyawaung-mk).</p>
+  <div class="page">
+    <header>
+      <div class="brand">MOE KYAW AUNG · PORTFOLIO</div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="hero-title">Android & Web Developer building clean, useful apps.</div>
+          <p class="hero-sub">
+            I focus on Android (Kotlin/Java) and lightweight web apps, with a special interest in civic-tech and data visualization.
+          </p>
+          <div class="hero-tags">
+            <span class="tag tag--accent">Android · Kotlin/Java</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">Vue / HTML / CSS</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#projects">View projects</a>
+            <a class="btn" href="https://github.com/Moekyawaung-mk" target="_blank" rel="noreferrer">
+              GitHub profile →
+            </a>
+          </div>
+          <div class="hero-meta">
+            Based in Myanmar · Open to remote Android/Web opportunities
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-card-tag">Snapshot</div>
+          <div class="hero-card-title">What I enjoy building</div>
+          <ul class="hero-card-list">
+            <li>• Android apps with clean, readable code</li>
+            <li>• Simple dashboards for real-world data</li>
+            <li>• Fast, single-page portfolio sites</li>
+          </ul>
+          <div class="hero-card-badge">Always learning · 2026</div>
+        </aside>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <p class="section-note">
+          Main technologies I use day to day. You can see the code style in my GitHub repositories.
+        </p>
+        <div class="grid grid--two">
+          <div class="card">
+            <div class="card-title">Android</div>
+            <div class="card-meta">Kotlin, Java, Android Studio</div>
+            <p style="font-size:13px;">
+              Activities, Fragments, RecyclerView, REST API integration, MVVM patterns, local storage (Room / SharedPreferences).
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">Clean UI</span>
+              <span class="card-tag">Material Design</span>
+              <span class="card-tag">Debugging</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Web & Tools</div>
+            <div class="card-meta">HTML, CSS, JS, GitHub Pages</div>
+            <p style="font-size:13px;">
+              Static sites, small Vue components, API-based widgets, and portfolio pages deployed with GitHub Pages.
+            </p>
+            <div class="card-tags">
+              <span class="card-tag">Responsive layout</span>
+              <span class="card-tag">Git & GitHub</span>
+              <span class="card-tag">Data viz basics</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Selected projects</h2>
+        <p class="section-note">
+          A few representative projects. For the full list, please visit my GitHub profile.
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <div class="card-title">Project 1 – Android App</div>
+            <div class="card-meta">Android · Kotlin/Java</div>
+            <p style="font-size:13px;">
+              Short one-line description of an Android app (e.g., task manager, notes, or civic-related tool) highlighting what problem it solves.
+            </p>
+            <a class="card-link" href="https://github.com/Moekyawaung-mk" target="_blank" rel="noreferrer">
+              View code on GitHub →
+            </a>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Project 2 – Web / Vue</div>
+            <div class="card-meta">HTML · CSS · Vue (optional)</div>
+            <p style="font-size:13px;">
+              Short description of a portfolio site, small dashboard, or GitHub API-based project you want to highlight.
+            </p>
+            <a class="card-link" href="https://github.com/Moekyawaung-mk" target="_blank" rel="noreferrer">
+              View code on GitHub →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p class="contact">
+          If you’d like to discuss Android or web projects (or civic-tech ideas), feel free to reach out.<br />
+          Email: <a href="mailto:moekyawaung.mka2030@gmail.com">moekyawaung.mka2030@gmail.com</a><br />
+          GitHub: <a href="https://github.com/Moekyawaung-mk" target="_blank" rel="noreferrer">
+          github.com/Moekyawaung-mk</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Moe Kyaw Aung</span>
+      <span>Built with HTML/CSS · Hosted on GitHub Pages</span>
+    </footer>
+  </div>
 </body>
 </html>
